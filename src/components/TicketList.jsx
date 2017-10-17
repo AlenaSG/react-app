@@ -3,7 +3,10 @@ import Ticket from "./Ticket";
 
 function TicketList(props){
   return (
-    <Ticket />
+    <Ticket
+      location ="3a"
+      names="Alena and Anna"
+      issue="Firebase won't save records"/>
   );
 }
 
