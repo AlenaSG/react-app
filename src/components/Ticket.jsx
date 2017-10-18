@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+
 function Ticket(props){
   var ticketStyles = {
     backgroundColor: "#ecf0f1",
