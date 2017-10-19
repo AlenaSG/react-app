@@ -1,5 +1,5 @@
 import React from "react";
-//import Ticket from "./Ticket";
+import NewTicketForm from "./NewTicketForm";
 //import { Button }  from "react-bootstrap";
 //import PropTypes from "prop-types";
 
@@ -8,26 +8,31 @@ class NewTicketControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {formVisibleOnPage: false};
-    this.handleDisplayingNewTicketForm = this.handleDisplayingNewTicketForm.bind(this);
+    //this.handleDisplayingNewTicketForm = this.handleDisplayingNewTicketForm.bind(this);
   }
 
   handleDisplayingNewTicketForm(event) {
     console.log("New ticket button clicked!");
+    console.log(this);
     this.setState({formVisibleOnPage: true});
   }
 
-  render() {
-    return (
-      //<div>
-        <button onClick={this.handleDisplayingNewTicketForm}>Request Help!</button>
-        //</div>
-      );
-  }
-}
-    // <Ticket
-    //   location ="3a"
-    //   names="Alena and Anna"
-    //   issue="Firebase won't save records"/>
+  render(){
+    const formVisibleOnPage = this.state.formVisibleOnPage;
+    let formAreaContent = null;
+    if (formVisibleOnPage){
+      formAreaContent = <NewTicketForm/>
+    } else {
+       formAreaContent = <button onClick={this.handleDisplayingNewTicketForm.bind(this)}>Request Help</button>;
+    }
 
+    return (
+      <div>
+        {formAreaContent}
+      </div>
+    );
+  }
+
+}
 
 export default NewTicketControl;
