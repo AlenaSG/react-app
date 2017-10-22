@@ -1,39 +1,59 @@
 import React from "react";
 import NewTicketForm from "./NewTicketForm";
-//import { Button }  from "react-bootstrap";
+import { Button }  from "react-bootstrap";
+import { Modal} from "react-bootstrap";
 import PropTypes from "prop-types";
 
 class NewTicketControl extends React.Component {
 
   constructor(props) {
     super(props);
-    this.showForm = this.showForm.bind(this);
-    this.hideForm = this.hideForm.bind(this);
-    this.state = {formVisibleOnPage: false};
+    this.showFormModal = this.showFormModal.bind(this);
+    this.hideFormModal = this.hideFormModal.bind(this);
+    this.state = {formModalIsShowing: false};
     //this.handleDisplayingNewTicketForm = this.handleDisplayingNewTicketForm.bind(this);
   }
 
-  showForm(event) {
-    this.setState({formVisibleOnPage: true});
+  showFormModal(event) {
+    this.setState({formModalIsShowing: true});
   }
 
-  hideForm(event) {
-    this.setState({formVisibleOnPage: false});
+  hideFormModal(event) {
+    this.setState({formModalIsShowing: false});
   }
 
   render(){
     //const formVisibleOnPage = this.state.formVisibleOnPage;
-    let formAreaContent = null;
-    if (this.state.formVisibleOnPage){
-      formAreaContent = <NewTicketForm onNewTicketCreation={this.props.onNewTicketCreation}
-      hideFormAfterSubmission = {this.hideForm}/>
-    } else {
-       formAreaContent = <button onClick={this.showForm}>Request Help</button>;
-    }
+    // let formAreaContent = null;
+    // if (this.state.formVisibleOnPage){
+    //   formAreaContent = <NewTicketForm onNewTicketCreation={this.props.onNewTicketCreation}
+    //   hideFormAfterSubmission = {this.hideForm}/>
+    // } else {
+    //    formAreaContent = <Button block bsStyle="primary" bsSize="large" onClick={this.showForm}>Request Help!</Button>;
+    // }
 
     return (
       <div>
-        {formAreaContent}
+        <Button
+          block="true"
+          bsStyle="primary"
+          bsSize="large"
+          onClick={this.showFormModal}>
+          Request Help!
+        </Button>
+        <Modal
+          show={this.state.formModalIsShowing}
+          onHide={this.hideFormModal}
+          bsSize="large">
+            <Modal.Header>
+              <Modal.Title>Request Help</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <NewTicketForm
+                onNewTicketCreation={this.props.onNewTicketCreation}
+                hideFormAfterSubmission = {this.hideFormModal}/>
+            </Modal.Body>
+          </Modal>
       </div>
     );
   }
