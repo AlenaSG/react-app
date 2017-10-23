@@ -9,6 +9,11 @@ class Queue extends React.Component {
       masterTicketList: [],
     };
     this.addNewTicketToList = this.addNewTicketToList.bind(this);
+    this.updateTicketTimeSinceOpened = this.updateTicketTimeSinceOpened.bind(this);
+  }
+
+  componentWillMount() {
+    console.log('componentWillMount');
   }
 
 addNewTicketToList(newTicket){
@@ -26,6 +31,46 @@ render() {
     </div>
   );
 }
+
+componentDidMount() {
+  this.timeSinceOpenedChecker = setInterval(() =>
+    this.updateTicketTimeSinceOpened(),
+    5000
+  );
+}
+
+updateTicketTimeSinceOpened() {
+  console.log("check");
+  let newMasterTicketList = this.state.masterTicketList.slice();
+  newMasterTicketList.forEach((ticket) =>
+  ticket.setTimeSinceOpened()
+);
+this.setState({masterTicketList: newMasterTicketList})
+}
+
+componentWillReceiveProps() {
+   console.log('componentWillReceiveProps');
+ }
+
+ shouldComponentUpdate() {
+   console.log('shouldComponentUpdate');
+   return true;
+ }
+
+ componentWillUpdate() {
+   console.log('componentWillUpdate');
+ }
+
+ componentDidUpdate() {
+   console.log('componentDidUpdate');
+ }
+
+componentWillUnmount() {
+  clearInterval(this.timeSinceOpenedChecker);
+}
+
+
+
 }
 
 export default Queue;
